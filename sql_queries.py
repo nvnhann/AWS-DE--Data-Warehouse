@@ -1,3 +1,7 @@
+"""
+Query drop, create, insert, copy sql.
+"""
+
 import configparser
 
 

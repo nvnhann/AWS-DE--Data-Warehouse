@@ -1,9 +1,18 @@
+"""
+This module defines functions to load data into staging tables and insert data into analytics tables.
+It reads SQL queries from 'sql_queries.py', connects to the database,
+executes the queries, and commits the changes.
+"""
+
 import configparser
 import psycopg2
 from sql_queries import copy_table_queries, insert_table_queries
 
 
 def load_staging_tables(cur, conn):
+    """
+    Loads data into staging tables.
+    """
     for query in copy_table_queries:
         print("Query loading: {}".format(query))
         cur.execute(query)
@@ -11,6 +20,9 @@ def load_staging_tables(cur, conn):
 
 
 def insert_tables(cur, conn):
+    """
+    Inserts data into analytics tables.
+    """
     for query in insert_table_queries:
         print("Query insert: {}".format(query))
         cur.execute(query)
@@ -18,6 +30,9 @@ def insert_tables(cur, conn):
 
 
 def main():
+    """
+    Main.
+    """
     config = configparser.ConfigParser()
     config.read('dwh.cfg')
 
